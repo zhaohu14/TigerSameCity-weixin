@@ -17,6 +17,6 @@
 <style>
     /*每个页面公共css */
     page {
-      background: linear-gradient(#fff, #f5f5f5);
+      background: linear-gradient( #f5f5f5);
     }
 </style>

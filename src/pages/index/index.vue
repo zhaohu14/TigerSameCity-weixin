@@ -1,4 +1,5 @@
 <template>
+<!--  style="background: linear-gradient(rgba(40,140,234,0.4), rgba(40,140,234, 0.4));background-image: url('../../static/background.jpg');background-size: 100%100%;-->
     <view class="content">
       <view class="headerSeach">
         <image src="../../static/icon/search.png"></image>
@@ -14,87 +15,77 @@
           </swiper-item>
         </swiper>
       </view>
+      <view class="recommendList">
+        <view class="recommend" v-for="(item, index) in articleArr" :key="index">
+          <view v-if="item.imageUrl || item.imageUrl !== ''" class="articleImage">
+            <image :src="item.imageUrl"></image>
+            <view class="articleTitle">{{ item.title }}</view>
+          </view>
+          <view class="content">
+            <view class="contentTitle">{{ item.title }}</view>
+            <view class="contentData">
+              <view>文章来源：{{ item.source }}</view>
+              <view>浏览次数: {{ item.browse }}</view>
+            </view>
+          </view>
+          <view class="positionTitle">{{ item.tag }}</view>
+        </view>
+      </view>
     </view>
 </template>
 
 <script lang="ts">
   import {
       defineComponent
-  } from "vue";
+  } from "vue"
+  import { api } from '../../api/api'
   export default defineComponent({
-      setup() {
-          return {
-              title: "hello",
-              indicatorDots: true,
-              autoplay: true,
-              interval: 3000,
-              duration: 500,
-              imageList: ['../../static//headerBanner/1.jpg', '../../static//headerBanner/2.jpg', '../../static//headerBanner/3.jpg']
+    setup() {
+      return {
+        title: "hello",
+        indicatorDots: true,
+        autoplay: true,
+        interval: 3000,
+        duration: 500,
+        imageList: ['https://img0.baidu.com/it/u=2521455223,3953349035&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=500', 'https://img0.baidu.com/it/u=1824155774,2992749210&fm=253&fmt=auto&app=138&f=JPEG?w=889&h=500', 'https://img2.baidu.com/it/u=2747068135,2426538140&fm=253&fmt=auto&app=138&f=JPEG?w=889&h=500'],
+        articleArr: [
+          {
+            id: 1,
+            title: '代码太多if else？教你优化代码，老大对你刮目相看！',
+            imageUrl: 'https://img0.baidu.com/it/u=2346750071,2418836909&fm=253&fmt=auto&app=138&f=JPEG?w=1015&h=500',
+            source: '站长',
+            browse: '146',
+            tag: 'JavaScript'
+          },
+          {
+            id: 2,
+            title: '代码太多if else？教你优化代码，老大对你刮目相看！',
+            imageUrl: 'https://img1.baidu.com/it/u=317791204,3405437293&fm=253&fmt=auto&app=138&f=JPEG?w=1254&h=500',
+            source: '站长',
+            browse: '146',
+            tag: 'JavaScript'
           }
-      },
+        ]
+      }
+    },
+    onLoad () {
+      console.log('11111')
+      // api.adminLogin({
+      //   uid: 'admin',
+      //   password: '111111'
+      // }).then((ret: any) => {
+      //   console.log(ret)
+      // })
+      api.wxLogin({
+        code: '11111'
+      }).then((ret: any) => {
+        console.log(ret)
+      })
+    }
   })
 </script>
 
 <style>
-   .uni-margin-wrap {
-		width: 690rpx;
-		width: 100%;
-	}
-  .headerSeach {
-    width: 95%;
-    height: 60rpx;
-    margin-left: 2.5%;
-    /* background: #FFFFFF; */
-    border: 1rpx solid #dbdbdb;
-    margin-bottom: 15rpx;
-    border-radius: 45rpx;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #eeeeee;
-    color: #7e7e7e;
-    font-size: 32rpx;
-    /* padding-left: 25rpx; */
-  }
-  .headerSeach image {
-    width: 40rpx;
-    height: 40rpx;
-    margin-left: 25rpx;
-  }
-  .headerSeach view {
-    width: calc(100% - 60rpx);
-    margin-left: 20rpx;
-  }
-	.swiper {
-    width: 95%;
-    margin-left: 2.5%;
-		height: 400rpx;
-	}
-	.swiper-item {
-		display: block;
-		height: 400rpx;
-		/* line-height: 300rpx; */
-		/* text-align: center; */
-	}
-  .swiper-item image {
-    width: 100%;
-    height: 100%;
-    border-radius: 25rpx;
-  }
-	.swiper-list {
-		margin-top: 40rpx;
-		margin-bottom: 0;
-	}
-	.uni-common-mt {
-		margin-top: 60rpx;
-		position: relative;
-	}
-	.info {
-		position: absolute;
-		right: 20rpx;
-	}
-	.uni-padding-wrap {
-		width: 550rpx;
-		padding: 0 100rpx;
-	}
+@import url('./style/index.css');
+  
 </style>
