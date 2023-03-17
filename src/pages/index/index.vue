@@ -76,11 +76,25 @@
       // }).then((ret: any) => {
       //   console.log(ret)
       // })
-      api.wxLogin({
-        code: '11111'
-      }).then((ret: any) => {
-        console.log(ret)
+      // @ts-ignore
+      uni.showLoading()
+      // @ts-ignore
+      uni.login({
+        provider: 'weixin',
+        success: res => {
+          console.log(res, '---')
+          if (res.code) {
+            api.wxLogin({
+              code: res.code
+            }).then((ret: any) => {
+              // @ts-ignore
+              uni.hideLoading()
+              console.log(ret)
+            })
+          }
+        }
       })
+      
     }
   })
 </script>
