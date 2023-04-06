@@ -35,7 +35,7 @@ var requestForHeader = function (url: String, data: Object, authorization: Strin
   })
 }
 // @ts-ignore
-var requestByHeader = function (url: String, data: Object, method?: "GET" | "OPTIONS" | "HEAD" | "POST" | "PUT" | "DELETE" | "TRACE" | "CONNECT" , header = { "content-type": "application/x-www-form-urlencoded", "Authorization": wx.getStorageSync("authorization") }) {
+var requestByHeader = function (url: String, data: Object, method?: "GET" | "OPTIONS" | "HEAD" | "POST" | "PUT" | "DELETE" | "TRACE" | "CONNECT" , header = { "content-type": "application/x-www-form-urlencoded", "Authorization": 'Bearer ' + wx.getStorageSync("authorization") }) {
   return new Promise((resolve, reject) => {
     //微信小程序的数据请求
     // @ts-ignore
@@ -47,7 +47,9 @@ var requestByHeader = function (url: String, data: Object, method?: "GET" | "OPT
       method: method,
       header,
       dataType: 'json',
-      success: resolve,
+      success: ret => {
+        resolve(ret.data)
+      },
       fail: reject
     })
   })

@@ -11,6 +11,12 @@
 			"style": {
 				"navigationBarTitleText": "我得"
 			}
+		},
+    {
+			"path": "pages/bindUser/bindUser",
+			"style": {
+				"navigationBarTitleText": "绑定用户"
+			}
 		}
 	],
   "tabBar": {
